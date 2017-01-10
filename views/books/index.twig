@@ -1,0 +1,35 @@
+{% extends '../layout.twig' %}
+
+{% block content %}
+    <h1>Articles list</h1>
+    <a href="/books/create" class="btn btn-primary btn-sm">Nouvel Article</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Author</th>
+            <th>Publication Year</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>image</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for b in books %}
+            <tr>
+                <td>{{ b.name }}</td>
+                <td>{{ b.author }}</td>
+                <td>{{ b.publication_year }}</td>
+                <td>{{ b.description }}</td>
+                <td>{{ b.category.name }}</td>
+                <td> <img src="{{ b.image }}" height="80" width="80"> 
+                <td>
+                    <a href="/books/{{ b._id }}" class="btn btn-default btn-xs"><i class="glyphicon glyphicon-pencil"></i></a>
+                    <a href="/books/{{ b._id }}/delete" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

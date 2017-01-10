@@ -1,0 +1,29 @@
+{% extends 'layout.twig' %}
+
+{% block content %}
+    <h1>Orders list</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>Book</th>
+            <th>Date</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block scripts %}
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        $(function(){
+            var socket = io.connect('http://localhost:3000');
+            socket.on('order', function (order) {
+                $('table tbody').prepend('<tr><td>'+order.user+'</td><td>'+order.book+'</td><td>' + order.date + '</td></tr>');
+            });
+        });
+    </script>
+{% endblock %}
